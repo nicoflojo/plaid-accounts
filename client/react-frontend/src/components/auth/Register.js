@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
-// removed for ts error 
-const newUser = {
-  name: this.state.name,
-  email: this.state.email,
-  password: this.state.password,
-  password2: this.state.password2
-};
-
-console.log(newUser);
-
 class Register extends Component {
   constructor() {
     super();
@@ -30,9 +19,19 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-  }
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
+    };
+    console.log(newUser);
+  };
 
   render() {
+
+    console.log(this.state);
     const { errors } = this.state;
 
     return (
@@ -48,7 +47,7 @@ class Register extends Component {
               <h4>
                 Register Below
               </h4>
-              <p className="grey-text text-darken-1">
+              <p className="grey-text text-darken-1 register-login">
                 Already have an account?
                 <Link to="/login">Login</Link>
               </p>
@@ -74,7 +73,7 @@ class Register extends Component {
                 />
                 <label htmlFor="email">Email</label>
               </div>
-              <div classname="input-field col 12">
+              <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
@@ -84,7 +83,7 @@ class Register extends Component {
                 />
                 <label htmlFor="password2">Password</label>
               </div>
-              <div classname="input-field col 12">
+              <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
