@@ -1,0 +1,18 @@
+.nav-link {
+  font-family: monospace;
+}
+
+.landing-wrapper__div {
+  height: 75vh;
+}
+
+.nav-register {
+  padding-left: 11.25px;
+}
+
+.nav-button {
+  width: 150px;
+  border-radius: 3px;
+  letter-spacing: 1.5px;
+  margin-top: 1rem;
+}

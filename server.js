@@ -20,8 +20,6 @@ require('./config/passport')(passport);
 
 app.use('/api/users', users);
 
-
-
 mongoose
   .connect(
     db,
