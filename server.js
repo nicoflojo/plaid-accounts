@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 
 const app = express();
 
@@ -23,6 +25,11 @@ mongoose
   )
   .then(() => console.log("MongoDB successully connected"))
   .catch(err => console.log(err));
+
+app.use(passport.initialize());
+require('./config/passport')(passsport);
+
+app.use('/api/users', users);
 
 const port = process.env.PORT || 5000;
 
