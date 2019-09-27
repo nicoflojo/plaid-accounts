@@ -2,7 +2,8 @@ import {
   SET_CURRENT_USER,
   USER_LOADING
 } from '../actions/types';
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
+
+const isEmpty = require('is-empty');
 
 const initialState = {
   isAuthenticated: false,
