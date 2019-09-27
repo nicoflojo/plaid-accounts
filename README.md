@@ -1,5 +1,5 @@
-# mern-authentication    
-mern stack authentication
+# plaid-accounts
+mern stack app using plaid to link accounts
 
 # notes    
 
