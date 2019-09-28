@@ -63,5 +63,15 @@ router.post(
   }
 );
 
+router.delete(
+  '/accounts/delte/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Account.findById(req.params.id).then(account => {
+      account.remove().then(() => req.json({ success: true }));
+    });
+  }
+)
+
 module.exports = router;
 
