@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/api/users');
-
+const plaid = require('./routes/api/plaid');
 const db = require('./config/keys').mongoURI;
-
 const app = express();
 
 app.use(
@@ -18,7 +17,9 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
+// Routes
 app.use('/api/users', users);
+app.use('/api/plaid');
 
 mongoose
   .connect(

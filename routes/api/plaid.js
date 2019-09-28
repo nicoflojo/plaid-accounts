@@ -22,5 +22,46 @@ var ITEM_ID = null;
 
 // Routes
 
+router.post(
+  '/accounts/add',
+  passport.authenticate('jwt', { session: false }),
+  (res, req) => {
+    PUBLIC_TOKEN = req.body.public.token;
+    const userId = req.user.id;
+    const institution = req.body.metadata.institution;
+    const { name, institution_id } = institution;
+
+    if (PUBLIC_TOKEN) {
+      client
+        .exchangePublicToken(PUBLIC_TOKEN)
+        .then(exchangeResponse => {
+          ACCESS_TOKEN = exchangeResponse.access_token;
+          ITEM_ID = exchangeResponse.item_id;
+
+          Account.findOne({
+            userId: req.user.id,
+            institutionId: institution_id
+          })
+            .then(account => {
+              if (account) {
+                console.log('Account already exists');
+              } else {
+                const newAccount = new Account({
+                  userId: userId,
+                  accessToken: ACCESS_TOKEN,
+                  itemId: ITEM_ID,
+                  institutionId: institution_id,
+                  institutionName: name
+                });
+                newAccount.save().then(account => res.json(account));
+              }
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    }
+  }
+);
+
 module.exports = router;
 
