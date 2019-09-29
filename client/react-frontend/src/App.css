@@ -20,3 +20,14 @@
 .register-login {
   padding-right: 10px;
 }
+
+main-btn {
+  width: 185px;
+  letter-spacing: 1.5px;
+  border-radius: 3px;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  opacity: .8;
+}
