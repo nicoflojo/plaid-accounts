@@ -83,5 +83,37 @@ router.get(
   }
 );
 
+router.post(
+  '/accounts/transactions',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const now = moment();
+    const today = now.format('YYYY-MM-DD');
+    const thirtyDaysAgo = now.subtract(30, 'days').format('YYYY-MM-DD');
+    let transactions = [];
+    const accounts = req.body;
+
+    if (accounts) {
+      accounts.forEach(function (account) {
+        ACCESS_TOKEN = account.accessToken;
+        const institutionName = account.institutionName;
+
+        client
+          .getTransactions(ACCESS_TOKEN, thirtyDaysAgo, today)
+          .then(response => {
+            transactions.push({
+              accountName: institutionName,
+              transactions: response.transactions
+            });
+            if (transactions.length === acccounts.length) {
+              res.json(transactions);
+            }
+          })
+          .catch(err => console.log(err));
+      });
+    }
+  }
+);
+
 module.exports = router;
 
