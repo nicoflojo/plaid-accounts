@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { getAccounts, addAccount } from '../../actions/accountActions';
 import Accounts from './Accounts';
+import Spinner from './Spinner';
 
 
 class Dashboard extends Component {
@@ -31,7 +32,7 @@ class Dashboard extends Component {
     let dashboardContent;
 
     if (accounts == null || accountsLoading) {
-      dashboardContent = <p className="center-align">Loading...</p>;
+      dashboardContent = <Spinner />;
     } else if (accounts.length > 0) {
       dashboardContent = <Accounts user={user} accounts={accounts} />;
     } else {
